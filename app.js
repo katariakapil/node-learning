@@ -41,7 +41,7 @@ app.get('/about', (req,res) => {
 
     res.render('about.hbs', {
         year : new Date().getFullYear(),
-        aboutData : "This is data passed to template"
+        aboutData : "Founded in 2014.  We are IT solution provider for retail industry."
     });
 });
 //get port from heroku
