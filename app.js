@@ -32,7 +32,7 @@ app.get('/', (req,res) => {
 
     res.render('home.hbs', {
         year : new Date().getFullYear(),
-        aboutData : "This is data passed to template"
+        aboutData : "HOME PAGE FOR WEBSITE"
     });
 });
 
