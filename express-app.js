@@ -39,5 +39,7 @@ app.get('/about', (req,res) => {
         aboutData : "This is data passed to template"
     });
 });
+//get port from heroku
+const port = process.env.PORT || 3000;
 
-app.listen(3000);
+app.listen(port);
