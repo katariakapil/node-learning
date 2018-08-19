@@ -29,6 +29,11 @@ app.get('/', (req,res) => {
     };
     res.send(data);
     */
+
+    res.render('home.hbs', {
+        year : new Date().getFullYear(),
+        aboutData : "This is data passed to template"
+    });
 });
 
 

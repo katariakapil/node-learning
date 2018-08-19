@@ -1,44 +1,50 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const hbs = require('hbs');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+//hbs.registerPartial(__dirname + '/views/partials');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine',hbs);
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(express.static(__dirname +'/public'));
+//middelware
+app.use((req,res,next) => {
+    //call application
+    var now = new Date().toString();
+    console.log(`request time ${now} ${req.method} ${req.url}`) ;
+    next();
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.get('/', (req,res) => {
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
+    /*   console.log("request to server");
+     //  res.send("hello express");
+       console.log(__dirname+'/public');
+
+       var data = {
+           "name":"Kapil",
+           "age":"35"
+       };
+       res.send(data);
+       */
+
+    res.render('home.hbs', {
+        year : new Date().getFullYear(),
+        aboutData : "This is data passed to template"
+    });
 });
 
-module.exports = app;
 
+app.get('/about', (req,res) => {
 
+    res.render('about.hbs', {
+        year : new Date().getFullYear(),
+        aboutData : "This is data passed to template"
+    });
+});
+//get port from heroku
+const port = process.env.PORT || 3000;
 
+app.listen(port);
