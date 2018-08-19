@@ -8,6 +8,7 @@ var app = express();
 app.set('view engine',hbs);
 
 app.use(express.static(__dirname +'/public'));
+
 //middelware
 app.use((req,res,next) => {
     //call application
@@ -29,6 +30,7 @@ app.get('/', (req,res) => {
        };
        res.send(data);
        */
+
 
     res.render('home.hbs', {
         year : new Date().getFullYear(),
