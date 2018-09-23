@@ -3,8 +3,6 @@ const hbs = require('hbs');
 
 var app = express();
 
-//hbs.registerPartial(__dirname + '/views/partials');
-
 app.set('view engine',hbs);
 
 app.use(express.static(__dirname +'/public'));
@@ -20,24 +18,21 @@ app.use((req,res,next) => {
 
 app.get('/', (req,res) => {
 
-    /*   console.log("request to server");
-     //  res.send("hello express");
-       console.log(__dirname+'/public');
-
-       var data = {
-           "name":"Kapil",
-           "age":"35"
-       };
-       res.send(data);
-       */
-
-
     res.render('home.hbs', {
         year : new Date().getFullYear(),
         aboutData : "HOME PAGE FOR WEBSITE"
     });
 });
 
+
+
+app.get('/product', (req,res) => {
+
+    res.render('product.hbs', {
+        year : new Date().getFullYear(),
+        aboutData : "HOME PAGE FOR WEBSITE"
+    });
+});
 
 app.get('/about', (req,res) => {
 
